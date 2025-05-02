@@ -1,0 +1,4 @@
+pyfiglet==0.8.post1
+termcolor==2.3.0
+requests==2.31.0
+uuid==1.30
