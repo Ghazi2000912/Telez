@@ -1,0 +1,27 @@
+name: Telz API Test (Limited Safe Mode)
+
+on:
+  workflow_dispatch:  # يسمح بتشغيل العملية يدويًا
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install pyfiglet termcolor requests
+
+      - name: Run Telz API Script (Test Mode)
+        env:
+          PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}  # ⚠️ استخدم رقمك فقط!
+          REPEAT_COUNT: 1  # ⚠️ لا تزيد عن 1 لتجنب الحظر
+        run: |
+          python telz_api.py "$PHONE_NUMBER" "$REPEAT_COUNT"
